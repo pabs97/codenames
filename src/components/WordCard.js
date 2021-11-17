@@ -1,13 +1,20 @@
-const WordCard = ({ word, color, onClick = () => {} }) => {
+import classnames from 'classnames';
 
-  let className = 'word-card';
-  if (color) className += ` --${color}`;
+const WordCard = ({ word, color, revealed, onClick = () => {} }) => {
+  
+  const className = classnames(
+    'word-card',
+    {
+      '--blue': color === 'blue',
+      '--red': color === 'red',
+      '--gray': color === 'gray',
+      '--black': color === 'black',
+      '--revealed': revealed,
+    }
+  );
 
   return (
-    <button
-      className={className}
-      onClick={onClick}
-    >
+    <button className={className} onClick={onClick}>
       {word}
     </button>
   );

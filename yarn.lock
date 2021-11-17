@@ -1376,7 +1376,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.5.5", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.10.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.6", "@babel/runtime@^7.9.2":
   version "7.16.3"
   resolved "https://art-bobcat.autodesk.com:443/artifactory/api/npm/team-account-npm-virtual/@babel/runtime/-/runtime-7.16.3.tgz#b86f0db02a04187a3c17caa77de69840165d42d5"
   integrity sha1-uG8NsCoEGHo8F8qnfeaYQBZdQtU=
@@ -3650,6 +3650,11 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.3.1:
+  version "2.3.1"
+  resolved "https://art-bobcat.autodesk.com:443/artifactory/api/npm/team-account-npm-virtual/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
+  integrity sha1-38+jiR4wbsHa0QXQ6I9EF7hTXo4=
+
 clean-css@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.3.tgz#507b5de7d97b48ee53d84adb0160ff6216380f78"
@@ -5902,6 +5907,13 @@ hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
+
+history@^5.1.0:
+  version "5.1.0"
+  resolved "https://art-bobcat.autodesk.com:443/artifactory/api/npm/team-account-npm-virtual/history/-/history-5.1.0.tgz#2e93c09c064194d38d52ed62afd0afc9d9b01ece"
+  integrity sha1-LpPAnAZBlNONUu1ir9CvydmwHs4=
+  dependencies:
+    "@babel/runtime" "^7.7.6"
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -9689,6 +9701,21 @@ react-refresh@^0.8.3:
   version "0.8.3"
   resolved "https://art-bobcat.autodesk.com:443/artifactory/api/npm/team-account-npm-virtual/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha1-ch1GV2ctQAxePHXQY8SoX7LV1o8=
+
+react-router-dom@^6.0.2:
+  version "6.0.2"
+  resolved "https://art-bobcat.autodesk.com:443/artifactory/api/npm/team-account-npm-virtual/react-router-dom/-/react-router-dom-6.0.2.tgz#860cefa697b9d4965eced3f91e82cdbc5995f3ad"
+  integrity sha1-hgzvppe51JZeztP5HoLNvFmV860=
+  dependencies:
+    history "^5.1.0"
+    react-router "6.0.2"
+
+react-router@6.0.2:
+  version "6.0.2"
+  resolved "https://art-bobcat.autodesk.com:443/artifactory/api/npm/team-account-npm-virtual/react-router/-/react-router-6.0.2.tgz#bd2b0fa84fd1d152671e9f654d9c0b1f5a7c86da"
+  integrity sha1-vSsPqE/R0VJnHp9lTZwLH1p8hto=
+  dependencies:
+    history "^5.1.0"
 
 react-scripts@4.0.3:
   version "4.0.3"

@@ -1,4 +1,5 @@
 import { createContext, useReducer, useContext } from 'react';
+import shuffleArray from '../utils/shuffleArray';
 
 const cards = [
   'apple',
@@ -67,15 +68,27 @@ const initial = {
 
 
 const gameReducer = (state, action) => {
+
+  let newCards;
+
   switch (action.type) {
+
+    case 'CLEAR_BOARD':
+      window.localStorage.setItem('codenames', JSON.stringify([]));
+      return { ...initial };
     case 'SETUP_GAME':
 
-      let blueRemaining = 8;
-      let redRemaining = 8;
+      let blue = 8;
+      let red = 9;
 
-      action.blueTurn ? blueRemaining += 1: redRemaining += 1;
+      // action.blueTurn ? blueRemaining += 1: redRemaining += 1;
+      if (action.blueTurn) [red, blue] = [blue, red];
 
-      const newCards = cards.map((card, i) => {
+      newCards = shuffleArray(cards, 8);
+
+      console.log({ newCards });
+
+      newCards = newCards.map((card, i) => {
         return {
           word: card,
           color: solutions[i],
@@ -83,12 +96,28 @@ const gameReducer = (state, action) => {
         };
       });
 
+      
+
+      window.localStorage.setItem('codenames', JSON.stringify(newCards));
+
       return {
         cards: newCards,
         blueTurn: action.blueTurn,
-        blueRemaining,
-        redRemaining,
+        blueRem: blue,
+        redRem: red,
       };
+
+    case 'REVEAL_CARD':
+      newCards = [...state.cards];
+      newCards[action.index].revealed = true;
+
+      window.localStorage.setItem('codenames', JSON.stringify(newCards));
+
+      return {
+        ...state,
+        cards: newCards,
+      };
+
     default:
       return state;
   }
