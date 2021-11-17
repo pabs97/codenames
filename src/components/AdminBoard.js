@@ -1,4 +1,3 @@
-import './GameBoard.scss'
 import { useContext } from 'react';
 import { GameContext } from '../context/GameContext';
 import WordCard from './WordCard';

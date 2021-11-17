@@ -1,4 +1,3 @@
-import './GameBoard.scss'
 import WordCard from './WordCard';
 import useLocalStorageGameState from '../hooks/useLocalStorageGameState';
 
