@@ -1,7 +1,7 @@
 import { createContext, useReducer, useContext } from 'react';
 import shuffleArray from '../utils/shuffleArray';
 
-const cards = [
+const baseCards = [
   'apple',
   'banana',
   'car',
@@ -28,7 +28,7 @@ const cards = [
   'xylophone',
   'yen',
 ];
-const solutions = [
+const baseSolutions = [
   'blue',
   'blue',
   'blue',
@@ -60,35 +60,44 @@ const GameContext = createContext();
 
 const initial = {
   cards: [],
-  // firstMoveBlue: true,
+  solutions: [],
   blueTurn: true,
-  blueRemaining: 0,
-  redRemaining: 0,
+  blueRem: 0,
+  redRem: 0,
 };
-
 
 const gameReducer = (state, action) => {
 
-  let newCards;
+  let cards;
+  let solutions;
 
   switch (action.type) {
 
     case 'CLEAR_BOARD':
       window.localStorage.setItem('codenames', JSON.stringify([]));
       return { ...initial };
+      
     case 'SETUP_GAME':
 
-      let blue = 8;
-      let red = 9;
+      let blue = 9;
+      let red = 8;
+      solutions = [...baseSolutions];
 
-      // action.blueTurn ? blueRemaining += 1: redRemaining += 1;
-      if (action.blueTurn) [red, blue] = [blue, red];
+      // Swap the colors depending on who goes first
+      if (!action.blueTurn) {
+        [red, blue] = [blue, red];
 
-      newCards = shuffleArray(cards, 8);
+        solutions = solutions.map((sol => {
+          if (sol === 'blue') return 'red';
+          if (sol === 'red') return 'blue';
+          return sol;
+        }))
+      }
 
-      console.log({ newCards });
+      cards = shuffleArray(baseCards, action.cardsShuff);
+      solutions = shuffleArray(solutions, action.solsShuff);
 
-      newCards = newCards.map((card, i) => {
+      cards = cards.map((card, i) => {
         return {
           word: card,
           color: solutions[i],
@@ -98,24 +107,24 @@ const gameReducer = (state, action) => {
 
       
 
-      window.localStorage.setItem('codenames', JSON.stringify(newCards));
+      window.localStorage.setItem('codenames', JSON.stringify(cards));
 
       return {
-        cards: newCards,
+        cards: cards,
         blueTurn: action.blueTurn,
         blueRem: blue,
         redRem: red,
       };
 
     case 'REVEAL_CARD':
-      newCards = [...state.cards];
-      newCards[action.index].revealed = true;
+      cards = [...state.cards];
+      cards[action.index].revealed = true;
 
-      window.localStorage.setItem('codenames', JSON.stringify(newCards));
+      window.localStorage.setItem('codenames', JSON.stringify(cards));
 
       return {
         ...state,
-        cards: newCards,
+        cards: cards,
       };
 
     default:
@@ -124,16 +133,13 @@ const gameReducer = (state, action) => {
 };
 
 const GameProvider = ({ children }) => {
-
   const [state, dispatch] = useReducer(gameReducer, initial);
-
 
   return (
     <GameContext.Provider value={[ state, dispatch ]}>
       {children}
     </GameContext.Provider>
   );;
-
 };
 
 export { GameContext, GameProvider };

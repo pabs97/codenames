@@ -3,28 +3,32 @@ import './App.scss';
 import AdminBoard from  './components/AdminBoard';
 import PublicBoard from  './components/PublicBoard';
 import SetupController from './components/SetupController';
+import AdminScoreBoard from './components/AdminScoreBoard';
 import { GameProvider } from './context/GameContext'
 
-import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/public" exact element={<PublicBoard />} />
-        <Route
-          path="/"
-          element={
-            <div className="App">
+    <main className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/public" exact element={<PublicBoard />} />
+          <Route
+            path="/"
+            element={
+              // <div className="App">
               <GameProvider>
+                <AdminScoreBoard />
                 <SetupController />
                 <AdminBoard />
               </GameProvider>
-            </div>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+              // </div>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </main>
   );
 }
 

@@ -1,9 +1,10 @@
-import { useContext } from 'react';
-import ControllerButton from './ControllerButton';
-import { GameContext } from '../context/GameContext';
+import { useContext, useState } from "react";
+import ControllerButton from "./ControllerButton";
+import { GameContext } from "../context/GameContext";
+
+const generateNumber = () => Math.ceil(Math.random() * 300);
 
 const SetupController = () => {
-
   // const state = useContext(GameContext);
   const [state, dispatch] = useContext(GameContext);
 
@@ -20,27 +21,78 @@ const SetupController = () => {
     cardsRevealed
 
     scoreboard
+    single quote lint
    */
+  const [config, setConfig] = useState({
+    blueTurn: true,
+    cardsShuff: generateNumber(),
+    solsShuff: generateNumber(),
+  });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch({ type: "SETUP_GAME", ...config });
+  };
 
   return (
-    <section className='setup-controller'>
-      <ControllerButton
-        label='create game'
-        onClick={() => dispatch({ type: 'SETUP_GAME', blueTurn: false})}
-      />
-      <ControllerButton
-        label='clear board'
-        onClick={() => dispatch({ type: 'CLEAR_BOARD' })}
-      />
-      <ControllerButton
-        label='public board'
-        onClick={() => window.open('/public', '_blank')}
-      />
-      <input type="checkbox" id="blue-first" name="blue-first" />
-      <label for="blue-first">Blue First</label>
-    </section>
+    <form className="setup-controller" onSubmit={handleSubmit}>
+
+      <div className="setup-controller__input-group">
+        <label for="blue-first">Blue First</label>
+        <input
+          type="checkbox"
+          id="blue-first"
+          name="blue-first"
+          checked={config.blueTurn}
+          onChange={(e) => setConfig({ ...config, blueTurn: e.target.checked})}
+        />
+      </div>
+
+      <div className="setup-controller__input-group">
+        <label for="blue-first">Card Shuffle</label>
+        <input
+          type="number"
+          name="cards-shuffle"
+          value={config.cardsShuff}
+          onChange={(e) => setConfig({ ...config, cardsShuff: e.target.value})}
+        />
+        <button
+          type='button'
+          onClick={() => {
+            const cardsShuff = generateNumber();
+            setConfig({ ...config, cardsShuff });
+          }}
+        >
+          Random
+        </button>
+      </div>
+
+
+
+
+      <div className="setup-controller__input-group">
+        <label for="blue-first">Solutions Shuffle</label>
+        <input
+          type="number"
+          name="sols-shuffle"
+          value={config.solsShuff}
+          onChange={(e) => setConfig({ ...config, solsShuff: e.target.value })}
+        />
+        <button
+          type='button'
+          onClick={() => {
+            const solsShuff = generateNumber();
+            setConfig({ ...config, solsShuff });
+          }}
+        >
+          Random
+        </button>
+      </div>
+
+      <button type="submit">Create Game</button>
+    </form>
   );
+
 };
 
 export default SetupController;

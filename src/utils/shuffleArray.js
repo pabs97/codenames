@@ -1,6 +1,5 @@
 const shuffleArray = (arr, hash) => {
   const arrCopy = [...arr];
-  const copyLength = arr.length;
   const newArray = [];
   let count = 0;
   let index = 0;
