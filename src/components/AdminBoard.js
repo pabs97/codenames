@@ -1,21 +1,25 @@
 import { useContext } from 'react';
 import { GameContext } from '../context/GameContext';
 import WordCard from './WordCard';
+import classnames from 'classnames';
 
-const AdminBoard = ({ admin }) => {
-
+const AdminBoard = () => {
   const [state, dispatch] = useContext(GameContext);
 
+  const classNames = classnames('game-board --admin', {
+    '--show-word': state.showRevealed,
+    '--hide-word': !state.showRevealed,
+  });
+
   return (
-    <section className='game-board --admin'>
+    <section className={classNames}>
       {state.cards.map((card, i) => {
-        
         return (
           <WordCard
             key={card.word}
             word={card.word}
             color={card.color}
-            revealed
+            revealed={card.revealed}
             onClick={() => {
               dispatch({
                 type: 'REVEAL_CARD',
@@ -23,11 +27,10 @@ const AdminBoard = ({ admin }) => {
               });
             }}
           />
-        )
+        );
       })}
     </section>
   );
-
 };
 
 export default AdminBoard;

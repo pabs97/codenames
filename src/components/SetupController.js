@@ -1,35 +1,15 @@
 import { useContext, useState } from "react";
-import ControllerButton from "./ControllerButton";
 import { GameContext } from "../context/GameContext";
 
 const generateNumber = () => Math.ceil(Math.random() * 300);
 
 const SetupController = () => {
-  // const state = useContext(GameContext);
   const [state, dispatch] = useContext(GameContext);
-
-  console.log({ state });
-
-  /*
-    TODO
-
-    Set up game params
-    cardsHash
-    solutionsHash
-    blueFirst
-    
-    cardsRevealed
-
-    scoreboard
-    single quote lint
-   */
   const [config, setConfig] = useState({
     blueTurn: true,
     cardsShuff: generateNumber(),
     solsShuff: generateNumber(),
   });
-
-  // const [showRevealed, setShowRevealed] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,22 +17,8 @@ const SetupController = () => {
   };
 
   return (
-    <form className="setup-controller" onSubmit={handleSubmit}>
-      
-      
-      
-      <div className="setup-controller__input-group">
-        <label for="show-revealed-words">Show Revealed Words</label>
-        <input
-          type="checkbox"
-          id="show-revealed-words"
-          name="show-revealed-words"
-          checked={state.showRevealed}
-          onChange={(e) => dispatch({ type: 'TOGGLE_REVEALED_WORDS', showRevealed: !state.showRevealed })}
-        />
-      </div>
-
-      <div className="setup-controller__input-group">
+    <form onSubmit={handleSubmit}>
+      <div className="game-controller__input-group">
         <label for="blue-first">Blue First</label>
         <input
           type="checkbox"
@@ -63,7 +29,7 @@ const SetupController = () => {
         />
       </div>
 
-      <div className="setup-controller__input-group">
+      <div className="game-controller__input-group">
         <label for="blue-first">Card Shuffle</label>
         <input
           type="number"
@@ -82,7 +48,7 @@ const SetupController = () => {
         </button>
       </div>
 
-      <div className="setup-controller__input-group">
+      <div className="game-controller__input-group">
         <label for="blue-first">Solutions Shuffle</label>
         <input
           type="number"
@@ -100,8 +66,9 @@ const SetupController = () => {
           Random
         </button>
       </div>
-
-      <button type="submit">Create Game</button>
+      <div className="game-controller__input-group">
+        <button type="submit">Create Game</button>
+      </div>
     </form>
   );
 

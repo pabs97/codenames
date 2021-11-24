@@ -1,11 +1,8 @@
-import logo from './logo.svg';
 import './App.scss';
 import AdminBoard from  './components/AdminBoard';
 import PublicBoard from  './components/PublicBoard';
-import SetupController from './components/SetupController';
-import AdminScoreBoard from './components/AdminScoreBoard';
+import GameController from './components/GameController';
 import { GameProvider } from './context/GameContext'
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -17,13 +14,10 @@ function App() {
           <Route
             path="/"
             element={
-              // <div className="App">
               <GameProvider>
-                <AdminScoreBoard />
-                <SetupController />
+                <GameController />
                 <AdminBoard />
               </GameProvider>
-              // </div>
             }
           />
         </Routes>
