@@ -9,7 +9,7 @@ body {
   justify-content: center;
   align-items: center;
   // border: 1px dotted red;
-  max-width: 1200px;
+  // max-width: 1200px;
 }
 
 .game-board {
@@ -66,6 +66,9 @@ body {
 
   // public class probably not necessary
   &.--public {
+    width: 90vh;
+    height: 90vh;
+
     &.--show-word .--revealed {
       &.--blue {
         border: 15px solid blue;

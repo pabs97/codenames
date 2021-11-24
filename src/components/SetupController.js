@@ -4,7 +4,7 @@ import { GameContext } from "../context/GameContext";
 const generateNumber = () => Math.ceil(Math.random() * 300);
 
 const SetupController = () => {
-  const [state, dispatch] = useContext(GameContext);
+  const [, dispatch] = useContext(GameContext);
   const [config, setConfig] = useState({
     blueTurn: true,
     cardsShuff: generateNumber(),
@@ -19,7 +19,7 @@ const SetupController = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="game-controller__input-group">
-        <label for="blue-first">Blue First</label>
+        <label htmlFor="blue-first">Blue First</label>
         <input
           type="checkbox"
           id="blue-first"
@@ -30,7 +30,7 @@ const SetupController = () => {
       </div>
 
       <div className="game-controller__input-group">
-        <label for="blue-first">Card Shuffle</label>
+        <label htmlFor="blue-first">Card Shuffle</label>
         <input
           type="number"
           name="cards-shuffle"
@@ -49,7 +49,7 @@ const SetupController = () => {
       </div>
 
       <div className="game-controller__input-group">
-        <label for="blue-first">Solutions Shuffle</label>
+        <label htmlFor="blue-first">Solutions Shuffle</label>
         <input
           type="number"
           name="sols-shuffle"
