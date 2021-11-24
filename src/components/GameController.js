@@ -25,6 +25,13 @@ const GameController = () => {
         >
           {setupMenu ? 'Hide' : 'Show'} Setup Menu
         </button>
+
+        <button
+          type="button"
+          onClick={() => window.open('/public', '_blank')}
+        >
+          Open Public Board
+        </button>
       </div>
       {setupMenu && <SetupController />}
     </section>
