@@ -29,6 +29,8 @@ const SetupController = () => {
     solsShuff: generateNumber(),
   });
 
+  // const [showRevealed, setShowRevealed] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({ type: "SETUP_GAME", ...config });
@@ -36,6 +38,19 @@ const SetupController = () => {
 
   return (
     <form className="setup-controller" onSubmit={handleSubmit}>
+      
+      
+      
+      <div className="setup-controller__input-group">
+        <label for="show-revealed-words">Show Revealed Words</label>
+        <input
+          type="checkbox"
+          id="show-revealed-words"
+          name="show-revealed-words"
+          checked={state.showRevealed}
+          onChange={(e) => dispatch({ type: 'TOGGLE_REVEALED_WORDS', showRevealed: !state.showRevealed })}
+        />
+      </div>
 
       <div className="setup-controller__input-group">
         <label for="blue-first">Blue First</label>
@@ -44,7 +59,7 @@ const SetupController = () => {
           id="blue-first"
           name="blue-first"
           checked={config.blueTurn}
-          onChange={(e) => setConfig({ ...config, blueTurn: e.target.checked})}
+          onChange={(e) => setConfig({ ...config, blueTurn: e.target.checked })}
         />
       </div>
 
@@ -54,10 +69,10 @@ const SetupController = () => {
           type="number"
           name="cards-shuffle"
           value={config.cardsShuff}
-          onChange={(e) => setConfig({ ...config, cardsShuff: e.target.value})}
+          onChange={(e) => setConfig({ ...config, cardsShuff: e.target.value })}
         />
         <button
-          type='button'
+          type="button"
           onClick={() => {
             const cardsShuff = generateNumber();
             setConfig({ ...config, cardsShuff });
@@ -66,9 +81,6 @@ const SetupController = () => {
           Random
         </button>
       </div>
-
-
-
 
       <div className="setup-controller__input-group">
         <label for="blue-first">Solutions Shuffle</label>
@@ -79,7 +91,7 @@ const SetupController = () => {
           onChange={(e) => setConfig({ ...config, solsShuff: e.target.value })}
         />
         <button
-          type='button'
+          type="button"
           onClick={() => {
             const solsShuff = generateNumber();
             setConfig({ ...config, solsShuff });

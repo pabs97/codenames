@@ -1,15 +1,20 @@
 import WordCard from './WordCard';
 import useLocalStorageGameState from '../hooks/useLocalStorageGameState';
 
-const PublicBoard = ({ admin }) => {
-  const cards = useLocalStorageGameState();
+const PublicBoard = () => {
+  const lsGameState = useLocalStorageGameState();
+  const cards = lsGameState.cards || [];
+  const { showRevealed } = lsGameState;
 
-  console.log({ cards });
+  console.log({ cards, showRevealed });
+
+  let classNames = 'game-board --public ';
+  classNames += showRevealed ? '--show-word' : '--hide-word';
 
 
   return (
-    <section className='game-board --public'>
-      {cards.map((card, i) => {
+    <section className={classNames}>
+      {cards.map((card) => {
         
         return (
           <WordCard

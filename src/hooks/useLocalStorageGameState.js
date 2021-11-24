@@ -1,18 +1,13 @@
 import { useEffect, useState } from 'react';
 
-
-
-
-
 const useLocalStorageGameState = () => {
-  const [cards, setCards] = useState([]);
+  const [gameState, setGameState] = useState({});
 
-  const syncLocalStorage = (event) => {
-    // const newCards = window.localStorage.getItem(event.key);
-    const newCards = window.localStorage.getItem('codenames');
+  const syncLocalStorage = () => {
+    const newGameState = window.localStorage.getItem('codenames');
 
-    console.log({newCards});
-    setCards(JSON.parse(newCards));
+    console.log({newGameState});
+    setGameState(JSON.parse(newGameState));
   };
   
   useEffect(() => {
@@ -23,7 +18,7 @@ const useLocalStorageGameState = () => {
     return () => window.removeEventListener('storage', syncLocalStorage);
   }, []);
   
-  return cards;
+  return gameState;
 };
 
 export default useLocalStorageGameState;

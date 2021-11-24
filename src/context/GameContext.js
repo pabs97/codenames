@@ -1,33 +1,7 @@
-import { createContext, useReducer, useContext } from 'react';
+import { createContext, useReducer } from 'react';
 import shuffleArray from '../utils/shuffleArray';
 
 const baseCards = [
-  "apple",
-  "banana",
-  "car",
-  "dog",
-  "elephant",
-  "fence",
-  "gym",
-  "house",
-  "intelligence",
-  "japan",
-  "kindergarten",
-  "limousine",
-  "mentor",
-  "nicaragua",
-  "olympics",
-  "pencil",
-  "queen",
-  "rainbow",
-  "season",
-  "television",
-  "underwear",
-  "vandalism",
-  "waterfall",
-  "xylophone",
-  "yen",
-
   "africa",
   "agent",
   "air",
@@ -252,23 +226,26 @@ const initial = {
   blueTurn: true,
   blueRem: 0,
   redRem: 0,
+  showRevealed: false,
 };
 
 const gameReducer = (state, action) => {
 
   let cards;
   let solutions;
+  let lsGameState = {}
 
   switch (action.type) {
 
     case 'CLEAR_BOARD':
-      window.localStorage.setItem('codenames', JSON.stringify([]));
+      window.localStorage.setItem('codenames', JSON.stringify({}));
       return { ...initial };
       
     case 'SETUP_GAME':
 
       let blue = 9;
       let red = 8;
+      let showRevealed = false;
       solutions = [...baseSolutions];
 
       // Swap the colors depending on who goes first
@@ -293,28 +270,32 @@ const gameReducer = (state, action) => {
         };
       });
 
-      
-
-      window.localStorage.setItem('codenames', JSON.stringify(cards));
+      lsGameState = { cards, showRevealed };
+      window.localStorage.setItem('codenames', JSON.stringify(lsGameState));
 
       return {
         cards: cards,
         blueTurn: action.blueTurn,
         blueRem: blue,
         redRem: red,
+        showRevealed,
       };
 
     case 'REVEAL_CARD':
       cards = [...state.cards];
       cards[action.index].revealed = true;
+      lsGameState = { cards, showRevealed: state.showRevealed };
 
-      window.localStorage.setItem('codenames', JSON.stringify(cards));
+      window.localStorage.setItem('codenames', JSON.stringify(lsGameState));
 
-      return {
-        ...state,
-        cards: cards,
-      };
+      return { ...state, cards };
 
+    case 'TOGGLE_REVEALED_WORDS':
+      cards = [...state.cards];
+      lsGameState = { cards, showRevealed: action.showRevealed };
+      window.localStorage.setItem('codenames', JSON.stringify(lsGameState));
+      return { ...state, showRevealed: action.showRevealed };
+    
     default:
       return state;
   }
