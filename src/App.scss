@@ -35,16 +35,21 @@ body {
     }
     
     .--blue {
-      border: 10px solid blue;
+      // border: 10px solid blue;
+      border-color: blue;
     }
     .--red {
-      border: 10px solid red;
+      // border: 10px solid red;
+      border-color: red;
+
     }
-    // .--gray {
-    //   border: 10px solid rgb(143, 109, 109);
-    // }
+    .--gray {
+      border: .125rem solid rgb(143, 109, 109);
+      // border-color: transparent;
+    }
     .--black {
-      border: 10px solid black;
+      // border: 10px solid black;
+      border-color: black;
     }
     &.--hide-word .--revealed {
       color: transparent;
@@ -72,15 +77,18 @@ body {
     &.--show-word .--revealed {
       &.--blue {
         border: 15px solid blue;
+        // border-color: blue;
       }
       &.--red {
         border: 15px solid red;
+        // border-color: red;
       }
       &.--gray {
         border: 15px solid rgb(143, 109, 109);
       }
       &.--black {
         border: 15px solid black;
+        // border-color: black;
       }
     }
 
@@ -144,6 +152,10 @@ body {
   }
 }
 
+.--admin .word-card {
+  border: 0.5rem solid;
+}
+
 // mobile only
 @media (max-width: 940px) {
   .App {
@@ -168,5 +180,20 @@ body {
   }
   .word-card {
     font-size: 0.7rem;
+  }
+  .--admin .word-card {
+    border: 0.4rem solid;
+  }
+}
+
+
+
+@media (max-width: 440px) {
+  .word-card {
+    font-size: 0.3rem;
+  }
+
+  .--admin .word-card {
+    border: 0.3rem solid;
   }
 }
